@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: order-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 100.26.144.75:8848
+        ext-configs:  #可以显式指定dataId
+          dataId:
+        shared-configs:
+          - dataId: common-config.yml  #配置的dataId必须包含文件后缀名，且后缀和文件格式一致
+            group: DEFAULT_GROUP
+            refresh: true
+        extension-configs:
+          - dataId: extra-config.yml
+            group: DEFAULT_GROUP
+            refresh: true
+#        file-extension:  #指定文件后缀
+#  profiles:
+#    active: dev  指定环境，dev、prod、test，默认为空
+

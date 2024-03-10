@@ -1,0 +1,26 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    # nacos默认取应用名称为当前服务名称
+    name: order-service
+  cloud:
+    nacos:
+      server-addr: 100.26.144.75:8848
+
+
+
+feign:
+  client:
+    config:
+      stock-service:
+        requestInterceptors: # 针对feign客户端，增加拦截器配置
+          - com.myvocal.config.CustomerFeignInterceptor
+      default:
+        loggerLevel: FULL # 可选值有：BASIC, HEADERS, FULL
+logging:
+  level:
+    com.example.springcloudalibaba.order.service.StockFeignService: INFO
+#    org.springframework: DEBUG  #打印具体启动失败原因
+#    org.springframework.cloud: DEBUG

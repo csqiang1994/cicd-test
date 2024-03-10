@@ -1,0 +1,3 @@
+com\example\springcloudalibaba\order\service\StockFeignService.class
+com\example\springcloudalibaba\order\controller\OrderController.class
+OrderApplication.class

@@ -1,0 +1,3 @@
+com\myvocal\config\CustomerFeignInterceptor.class
+com\myvocal\util\AesUtil.class
+com\myvocal\config\FeignConfig.class

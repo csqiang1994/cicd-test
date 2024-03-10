@@ -1,0 +1,16 @@
+server:
+  port: 8182
+
+spring:
+  application:
+    name: stock-service
+  cloud:
+    nacos:
+      server-addr: 100.26.144.75:8848
+      discovery:
+        username: nacos
+        password: nacos
+        #group用来服务分组，比如订单域的多个服务
+#        group: test1
+        #命名空间用来不同环境服务实例隔离，必须填id，不填则为public
+#        namespace: a5521ae8-ade2-4166-8984-934135e9f0b9

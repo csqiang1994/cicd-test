@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--定义日志的根目录-->
+    <property name="LOG_HOME" value="./logs"/>
+
+    <!--定义日志文件名称-->
+    <property name="APP_NAME" value="spring-cloud-alibaba-app"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 日志输出格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 文件输出，滚动策略 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 日志文件保存位置和文件名 -->
+        <file>${LOG_HOME}/${APP_NAME}.log</file>
+        <!-- 日志文件滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名称格式 -->
+            <fileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 最大历史记录天数 -->
+            <maxHistory>30</maxHistory>
+            <!-- 用于限制日志文件大小的策略 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 单个文件大小 -->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 指定包的日志级别 -->
+    <logger name="com.example.project" level="DEBUG"/>
+    <!--    <logger name="com.example.springcloudalibaba.order.service.StockFeignService" level="INFO"/>-->
+
+    <!-- Spring Boot相关日志配置 -->
+    <logger name="org.springframework" level="DEBUG"/>
+
+    <!-- 日志级别 -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
