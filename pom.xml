@@ -14,7 +14,7 @@
     </modules>
     <name>springcloudalibaba</name>
     <description>springcloudalibaba</description>
-    <!--根目录pom这么配置，只打包子maven项目-->
+    <!--根 目录pom这么配置，只打包子maven项目-->
     <packaging>pom</packaging>
     <properties>
         <java.version>11</java.version>
