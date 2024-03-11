@@ -1,0 +1,37 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO_URI
+      # 这里假设你已经有一个环境变量 $ECR_REPO_URI 存储了你的 ECR 仓库地址
+
+  build:
+    commands:
+      # Maven 打包 Spring Boot 应用
+      - 'echo "Current working directory: $(pwd)"'
+      # maven打包
+      - mvn clean install -pl $MODULE_NAME -am -DSkipTest=true
+      # 进入业务模块目录
+      - cd $MODULE_NAME
+      # 使用 Dockerfile 构建 Docker 镜像，这里假设 Dockerfile 名为 Dockerfile
+      - docker build -t csq-cicd-test:test .
+
+  post_build:
+    commands:
+      # 打印变量以确保它们已正确设置
+      - echo $IMAGE_NAME
+      - echo $IMAGE_TAG
+      - echo $ECR_REPO_URI
+      # 标记并推送镜像到 ECR
+      - docker tag $IMAGE_NAME:$IMAGE_TAG $ECR_REPO_URI/$IMAGE_NAME:$IMAGE_TAG
+      - docker push $ECR_REPO_URI/$IMAGE_NAME:$IMAGE_TAG
+
+      # 将 ECR 镜像地址输出为环境变量供 CodeDeploy 使用
+      - printf '[{"name":"%s","imageUri":"%s", "region":"%s","repoUri":"%s"}]' $MODULE_NAME $ECR_REPO_URI/$IMAGE_NAME:$IMAGE_TAG $AWS_REGION $ECR_REPO_URI > config.json
+
+artifacts:
+  files:
+    - $MODULE_NAME/config.json
+    - appsepc.yml
+    - scripts/deploy.sh

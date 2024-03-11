@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/cicd-test
+hooks:
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 300
+      runas: root
+      cwd: /home/cicd-test
