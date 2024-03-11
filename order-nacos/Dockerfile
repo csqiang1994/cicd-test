@@ -1,4 +1,5 @@
-FROM adoptopenjdk:11-jdk-hotspot
+# 从aws ecr拉取镜像，以防dockerhub速率限制
+FROM 188635254879.dkr.ecr.us-east-1.amazonaws.com/jdk11:latest
 
 ENV JVM_OPTS -Xms1600M -Xmx1600M
 ENV HOME_PATH /home
