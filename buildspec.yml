@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - aws ecr get-login-password --region AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO_URI
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO_URI
       # 这里假设你已经有一个环境变量 $ECR_REPO_URI 存储了你的 ECR 仓库地址
 
   build:
