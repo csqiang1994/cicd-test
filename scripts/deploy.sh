@@ -4,14 +4,14 @@
 # 遇到错误直接退出
 set -e
 
-cd /home/cicd-test
+cd /home/cicd-test/scripts
 
 ls
 
 LOG_FILE="/home/cicd-test/deploy.log"
 rm -rf LOG_FILE
 
-echo "currentUser:$(whoami)"
+echo "currentUser:$(whoami)" >> $LOG_FILE
 
 AWS_REGION=$(jq -r '.[0].region' config.json)
 ECR_REPOSITORY_URI=$(jq -r '.[0].repoUri' config.json)
@@ -24,6 +24,7 @@ echo "CONTAINER_NAME=$CONTAINER_NAME" >> $LOG_FILE
 echo "IMAGE_URI=$IMAGE_URI" >> $LOG_FILE
 
 # 登录到Amazon ECR
+echo "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPOSITORY_URI}"
 aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPOSITORY_URI} >> $LOG_FILE 2>&1
 
 echo "容器名称: $CONTAINER_NAME"
