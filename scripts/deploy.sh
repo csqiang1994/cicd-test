@@ -9,14 +9,14 @@ cd /home/cicd-test
 ls
 
 LOG_FILE="/home/cicd-test/deploy.log"
-rm -rf LOG_FILE
+sudo rm -rf LOG_FILE
 
 echo "currentUser:$(whoami)" >> $LOG_FILE
 
 AWS_REGION=$(jq -r '.[0].region' config.json)
 ECR_REPOSITORY_URI=$(jq -r '.[0].repoUri' config.json)
 CONTAINER_NAME=$(jq -r '.[0].name' config.json)
-export IMAGE_URI=$(jq -r '.[0].imageUri' config.json)
+sudo export IMAGE_URI=$(jq -r '.[0].imageUri' config.json)
 
 echo "AWS_REGION=$AWS_REGION" >> $LOG_FILE
 echo "ECR_REPOSITORY_URI=$ECR_REPOSITORY_URI" >> $LOG_FILE
