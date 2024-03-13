@@ -9,7 +9,7 @@ cd /home/cicd-test
 ls
 
 LOG_FILE="/home/cicd-test/deploy.log"
-sudo rm -rf LOG_FILE
+rm -rf LOG_FILE
 
 echo "currentUser:$(whoami)" >> $LOG_FILE
 
