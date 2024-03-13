@@ -10,6 +10,8 @@ ls
 
 LOG_FILE="/home/cicd-test/deploy.log"
 
+echo "currentUser:$(whoami)"
+
 AWS_REGION=$(jq -r '.[0].region' config.json)
 ECR_REPOSITORY_URI=$(jq -r '.[0].repoUri' config.json)
 CONTAINER_NAME=$(jq -r '.[0].name' config.json)

@@ -1,5 +1,10 @@
 version: 0.2
 
+cache:
+  paths:
+    - '/root/.m2/**/*' # Maven缓存路径
+    - '/root/.docker/**/*' # Docker缓存路径（如果使用Docker守护程序缓存）
+
 phases:
   pre_build:
     commands:
