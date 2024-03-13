@@ -4,7 +4,7 @@
 # 遇到错误直接退出
 set -e
 
-cd /home/cicd-test/scripts
+cd /home/cicd-test
 
 ls
 
