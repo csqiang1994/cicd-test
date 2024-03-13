@@ -28,10 +28,10 @@ phases:
       - docker push $ECR_REPO_URI/$IMAGE_NAME:$IMAGE_TAG
 
       # 将 ECR 镜像地址输出为环境变量供 CodeDeploy 使用
-      - printf '[{"name":"%s","imageUri":"%s", "region":"%s","repoUri":"%s"}]' $MODULE_NAME $ECR_REPO_URI/$IMAGE_NAME:$IMAGE_TAG $AWS_REGION $ECR_REPO_URI > config.json
+      - printf '[{"name":"%s","imageUri":"%s", "region":"%s","repoUri":"%s"}]' $MODULE_NAME $ECR_REPO_URI/$IMAGE_NAME:$IMAGE_TAG $AWS_REGION $ECR_REPO_URI > ../config.json
 
 artifacts:
   files:
-    - $MODULE_NAME/config.json
+    - config.json
     - appspec.yml
     - scripts/deploy.sh
