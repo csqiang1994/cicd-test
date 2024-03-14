@@ -25,7 +25,8 @@ echo "IMAGE_URI=$IMAGE_URI" >> $LOG_FILE
 
 # 登录到Amazon ECR
 echo "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPOSITORY_URI}" >> $LOG_FILE
-aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPOSITORY_URI} >> $LOG_FILE 2>&1
+#aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPOSITORY_URI} >> $LOG_FILE 2>&1
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 188635254879.dkr.ecr.us-east-1.amazonaws.com >> $LOG_FILE 2>&1
 
 echo "容器名称: $CONTAINER_NAME"
 echo "镜像URI: $IMAGE_URI"
